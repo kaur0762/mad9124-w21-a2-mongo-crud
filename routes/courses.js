@@ -1,7 +1,11 @@
+const Course = require('../models/Course')
 const express = require('express')
 const router = express.Router()
 
-router.get('/', async (req, res) => {})
+router.get('/', async (req, res) => {
+    const courses = await Course.find()
+    res.send({data: courses})
+})
 
 router.post('/', async (req, res) => {})
 
