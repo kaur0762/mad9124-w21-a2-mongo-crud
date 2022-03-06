@@ -27,7 +27,23 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.patch('/:id', async (req, res) => {})
+router.patch('/:id', async (req, res) => {
+    try {
+        const {_id, ...otherAttributes} = req.body
+        const course = await Course.findByIdAndUpdate(
+        req.params.id,
+        {_id: req.params.id, ...otherAttributes},
+        {
+            new: true,
+            runValidators: true
+        }
+        )
+        if (!course) throw new Error('Resource not found')
+        res.send({data: course})
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
 
 router.put('/:id', async (req, res) => {})
 
@@ -43,17 +59,6 @@ function sendResourceNotFound(req, res) {
         }
         ]
     })
-}
-
-/**
- * Format the response data object according to JSON:API v1.0
- * @param {string} type The resource collection name, e.g. 'cars'
- * @param {Object} resource An instance object from that collection
- * @returns
- */
-function formatResponseData(type, resource) {
-    const {id, ...attributes} = resource
-    return {type, id, attributes}
 }
 
 module.exports = router
