@@ -4,7 +4,8 @@
   "description": "MAD9124 Mobile API Development",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "keywords": [
     "MAD9124",
@@ -26,6 +27,10 @@
   "homepage": "https://github.com/kaur0762/mad9124-w21-a2-mongo-crud#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "mongoose": "^6.2.4",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
