@@ -1,7 +1,7 @@
 {
   "name": "mad9124-w21-a2-mongo-crud",
   "version": "0.1.0",
-  "description": "",
+  "description": "MAD9124 Mobile API Development",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,17 @@
     "Robert McKenney <mckennr@algonquincollege.com>"
   ],
   "license": "ISC",
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaur0762/mad9124-w21-a2-mongo-crud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaur0762/mad9124-w21-a2-mongo-crud/issues"
+  },
+  "homepage": "https://github.com/kaur0762/mad9124-w21-a2-mongo-crud#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "morgan": "^1.10.0"
+  }
 }
