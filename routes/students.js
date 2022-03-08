@@ -29,7 +29,23 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.patch('/:id', async (req, res) => {})
+router.patch('/:id', async (req, res) => {
+    try {
+        const {_id, ...otherAttributes} = req.body
+        const student = await Student.findByIdAndUpdate(
+        req.params.id,
+        {_id: req.params.id, ...otherAttributes},
+        {
+            new: true,
+            runValidators: true
+        }
+        )
+        if (!student) throw new Error('Resource not found')
+        res.send({data: student})
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
 
 router.put('/:id', async (req, res) => {})
 
@@ -44,6 +60,18 @@ router.delete('/:id', async (req, res) => {})
 function formatResponseData(type, resource) {
     const {id, ...attributes} = resource
     return {type, id, attributes}
+}
+
+function sendResourceNotFound(req, res) {
+    res.status(404).send({
+        errors: [
+        {
+            status: '404',
+            title: 'Resource does not exist',
+            description: `We could not find a student with id: ${req.params.id}`
+        }
+        ]
+    })
 }
 
 module.exports = router
