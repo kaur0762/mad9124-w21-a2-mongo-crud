@@ -17,7 +17,17 @@ router.post('/', async (req, res) => {
     res.status(201).send({data: newStudent})
 })
 
-router.get('/:id', async (req, res) => {})
+router.get('/:id', async (req, res) => {
+    try {
+        const student = await Student.findById(req.params.id)
+        if (!student) {
+        throw new Error('Resource not found')
+        }
+        res.send({data: student})
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
 
 router.patch('/:id', async (req, res) => {})
 
