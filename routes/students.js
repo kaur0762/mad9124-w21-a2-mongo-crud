@@ -47,7 +47,24 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {})
+router.put('/:id', async (req, res) => {
+    try {
+        const {_id, ...otherAttributes} = req.body
+        const student = await Student.findByIdAndUpdate(
+        req.params.id,
+        {_id: req.params.id, ...otherAttributes},
+        {
+            new: true,
+            overwrite: true,
+            runValidators: true
+        }
+        )
+        if (!student) throw new Error('Resource not found')
+        res.send({data: student})
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
 
 router.delete('/:id', async (req, res) => {})
 
