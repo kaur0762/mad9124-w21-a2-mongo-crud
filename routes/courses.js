@@ -1,3 +1,4 @@
+const sanitizeBody = require('../middleware/sanitizeBody.js')
 const Course = require('../models/Course')
 const express = require('express')
 const router = express.Router()
@@ -7,7 +8,7 @@ router.get('/', async (req, res) => {
     res.send({data: courses.map(course => formatResponseData('courses', course.toObject()))})
 })
 
-router.post('/', async (req, res) => {
+router.post('/', sanitizeBody, async (req, res) => {
     let attributes = req.body
     delete attributes._id
 

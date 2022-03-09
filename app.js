@@ -14,10 +14,13 @@ mongoose
 
 const morgan = require('morgan')
 const express = require('express')
+const sanitizeMongo = require('express-mongo-sanitize')
 const app = express()
 
 app.use(morgan('tiny'))
 app.use(express.json())
+app.use(sanitizeMongo())
+
 app.use('/api/courses', require('./routes/courses'))
 app.use('/api/students', require('./routes/students'))
 
